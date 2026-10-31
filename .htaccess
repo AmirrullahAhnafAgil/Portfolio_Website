@@ -1,0 +1,51 @@
+# ==============================================================================
+# KEAMANAN TINGGI & OPTIMASI PORTOFOLIO WEB (APACHE / CPANEL / HOSTING .ID / .ME)
+# ==============================================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Paksa HTTPS (SSL Enforce)
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. SPA Routing (Vite React Client Routing)
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# 3. Security Headers
+<IfModule mod_headers.c>
+  # Mencegah MIME Type Sniffing
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Mencegah Clickjacking (Website tidak bisa di-embed di iframe luar)
+  Header always set X-Frame-Options "DENY"
+
+  # Mengaktifkan XSS Filter Browser
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # Referrer Policy
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Batasi Hak Akses Hardware (Kamera/Mic/Geo)
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # HSTS (Enforce HTTPS 2 Tahun)
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+  # Content Security Policy (CSP)
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https:;"
+</IfModule>
+
+# 4. Blokir Akses ke File Sensitif (.env, .git, .json konfigurasi internal)
+<FilesMatch "^\.(env|git|htaccess|config)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# 5. Disable Directory Browsing
+Options -Indexes

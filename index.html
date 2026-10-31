@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Security: Viewport, Anti Clickjacking, Referrer Policy -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Fresh Graduate Software Engineer Web Portfolio. Ready to contribute in building modern, scalable, and responsive web applications." />
+    <meta name="author" content="Amirrullah Ahnaf Agil" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph (SEO Social Media) -->
+    <meta property="og:title" content="Portfolio | Fresh Graduate Software Engineer" />
+    <meta property="og:description" content="Modern Web Portfolio. Explore projects, technical skills, and view the latest CV." />
+    <meta property="og:type" content="website" />
+    
+    <title>Portfolio | Fresh Graduate Software Engineer</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    
+    <!-- Google Fonts: Orbitron (Futuristic Logo), Cinzel (Bankai), Plus Jakarta Sans (Modern UI), JetBrains Mono (Tech) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Theme Initialization Script to avoid FOUC -->
+    <script>
+      (function() {
+        try {
+          const stored = localStorage.getItem('theme');
+          if (stored === 'light') {
+            document.documentElement.classList.remove('dark');
+          } else {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-[#030712] dark:text-slate-100 antialiased selection:bg-cyan-500 selection:text-white transition-colors duration-300">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
